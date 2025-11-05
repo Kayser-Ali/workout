@@ -1,5 +1,5 @@
 import Storage from '@react-native-async-storage/async-storage';
-import { useNavigation } from '@react-navigation/native';
+import { Link, useRouter } from 'expo-router';
 import React, { useEffect } from 'react';
 import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import {
@@ -12,7 +12,8 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function HomeScreen() {
-  const navigator = useNavigation();
+  const router = useRouter()
+  
   const [visible, setVisible] = React.useState(false);
   const [text, setText] = React.useState('');
   const [workouts, setWorkouts] = React.useState<[string, string][]>([]); 
@@ -39,9 +40,10 @@ export default function HomeScreen() {
     }
   }
 
-  const openWorkout = async (id: string) => {
-      const value = await Storage.getItem(id);
-      navigator.navigate('Workout', { id })
+  const openWorkout = async (identity: string) => {
+      const value = await Storage.getItem(identity);
+      router.setParams
+      router.navigate('/workout/value', value)
   }
 
   useEffect(() => {
@@ -75,9 +77,11 @@ export default function HomeScreen() {
     <View style={{borderBottomColor: '#2b2b2b', borderBottomWidth: 5, paddingHorizontal: 5}}/>
     <View >
       <FlatList style={{}} data={workouts}   renderItem={({ item }) => (
-   <TouchableOpacity style={styles.workoutItem} onPress={openWorkout(item[0])}>
-      <Text style={styles.workoutText}>{item[1]}</Text>
-    </TouchableOpacity>
+        <Link href={{pathname: "/workouts/[id]", params: { id: item[0]}}} >
+        <TouchableOpacity style={styles.workoutItem}>
+        <Text style={styles.workoutText}>{item[1]}</Text>
+        </TouchableOpacity>
+        </Link>
   )}/>
     </View>
     </PaperProvider>
