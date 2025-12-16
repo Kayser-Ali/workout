@@ -34,7 +34,7 @@ export default function workout() {
   };
 
   const handleConfirm = async () => {
-    await addExercises(params.id, exercise)
+    await addExercises(params.id, exercise);
 
     setExercise("");
     closePrompt();
@@ -48,11 +48,19 @@ export default function workout() {
   return (
     <PaperProvider>
       <SafeAreaView>
-        <TouchableOpacity testID="exerciseButton" style={styles.button} onPress={openPrompt}>
+        <TouchableOpacity
+          testID="exerciseButton"
+          style={styles.button}
+          onPress={openPrompt}
+        >
           <Text style={styles.buttonText}>Exercise hinzufügen</Text>
         </TouchableOpacity>
         <Portal>
-          <Dialog testID="dialogPopup" visible={visible} onDismiss={closePrompt}>
+          <Dialog
+            testID="dialogPopup"
+            visible={visible}
+            onDismiss={closePrompt}
+          >
             <Dialog.Title>Exercise-Namen eingeben</Dialog.Title>
             <Dialog.Content>
               <TextInput
@@ -69,17 +77,15 @@ export default function workout() {
           </Dialog>
         </Portal>
       </SafeAreaView>
-              <FlatList
-                style={{}}
-                data={exerciseList}
-                renderItem={({ item }) => (
-                    <TouchableOpacity testID="createdExercise">
-                      <Text style={styles.workoutText}>{item}</Text>
-                    </TouchableOpacity>
-                )}
-              />
+      <FlatList
+        style={{}}
+        data={exerciseList}
+        renderItem={({ item }) => (
+          <TouchableOpacity testID="createdExercise">
+            <Text style={styles.workoutText}>{item}</Text>
+          </TouchableOpacity>
+        )}
+      />
     </PaperProvider>
   );
 }
-
-

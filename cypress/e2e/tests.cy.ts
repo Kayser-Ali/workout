@@ -1,10 +1,11 @@
 describe("Add Workout", () => {
   beforeEach(() => {
     cy.visit("http://localhost:8081/");
+    cy.wait(1000);
   });
 
   it("Adding a new workout", () => {
-    cy.get("[data-testid=addWorkoutButton]", {timeout: 10000 }).should("not.be.disabled").click();
+    cy.get("[data-testid=addWorkoutButton]").click();
 
     cy.get("[data-testid=workoutTextInput]").type("this is a test");
 

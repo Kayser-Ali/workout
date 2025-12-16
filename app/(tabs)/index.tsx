@@ -105,7 +105,7 @@ export default function HomeScreen() {
             <Link
               href={{ pathname: "/workouts/[id]", params: { id: item.id } }}
             >
-              <TouchableOpacity testID="createdWorkout" style={styles.workoutItem}>
+              <TouchableOpacity testID="createdWorkout" style={styles.workoutItem} onPress={() => console.log("clicked")}>
                 <Text style={styles.workoutText}>{item.name}</Text>
               </TouchableOpacity>
             </Link>
